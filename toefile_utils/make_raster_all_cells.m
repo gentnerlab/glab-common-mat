@@ -1,3 +1,8 @@
+%% make_raster_all_cells.m 
+%  Given a toefile, plot a spike raster plot for all trials of all stimuli
+%  Does this for every unit in the file, saving the figures to png
+%  Brad Theilman September 2015
+
 clear
 close all
 
@@ -37,7 +42,7 @@ for unit_index = 1:31
         end
     end
     fig = gcf;
-    fig.PaperPositionMode = 'auto';
+    fig.PaperPositionMode = 'auto';  % TODO: Save in a large resolution
     figfilename = strcat(datafile, '_cell', num2str(unit_index));
     print(figfilename, '-dpng', '-r0');
     close all

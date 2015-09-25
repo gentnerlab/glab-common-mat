@@ -1,5 +1,6 @@
 % kwik to mat.  Get good units out of sorted kwik file with stimulus
 % information and store in one well formatted mat file
+% Brad Theilman August/September 2015
 
 clear
 close all
@@ -81,7 +82,7 @@ end
 
 %% Go through each cell and build final data matrix
 
-fs = 31250.0;
+fs = 31250.0; % TODO: get fs from data file itself 
 pre_stim_duration = 2; %in seconds
 post_stim_duration = 2; %seconds
 pre_stim_duration_samps = pre_stim_duration*fs;
@@ -93,7 +94,6 @@ toedata = cell(n_good_units, 1);
 
 for unit_num = 1:length(good_cluster_ids)
     
-    disp(unit_num)
     unit_entry = struct;
     unit_entry.id = good_cluster_ids(unit_num);
     stims = cell(nstims, 1);
@@ -101,7 +101,6 @@ for unit_num = 1:length(good_cluster_ids)
     % Loop through each stimulus
     for stim_num = 1:nstims
         
-        disp(stim_num)
         stim_unit_entry = struct;
         
         this_stim_data = stim_data{stim_num, 1};
@@ -120,7 +119,6 @@ for unit_num = 1:length(good_cluster_ids)
         %start
         toes = cell(this_stim_data.ntrials, 1);
         for trialnum = 1:this_stim_data.ntrials
-            disp(trialnum)
             trial_start = trial_start_times(trialnum);
             trial_end = trial_end_times(trialnum);
             
@@ -128,10 +126,6 @@ for unit_num = 1:length(good_cluster_ids)
             spiketimes_samps_thistrial = spiketimes_thisunit(spiketimes_thisunit >= trial_start & spiketimes_thisunit <= trial_end);
             spiketimes_samps_thistrial_relstimonset = spiketimes_samps_thistrial - this_stim_data.start_times(trialnum);
             spiketimes_secs_thistrial_relstimonset = double(spiketimes_samps_thistrial_relstimonset) / fs;
-            
-            if any(spiketimes_secs_thistrial_relstimonset <0)
-                disp('PRE-STIM ACTIVITY DETECTED');
-            end
             
             toes{trialnum, 1} = spiketimes_secs_thistrial_relstimonset;
         end

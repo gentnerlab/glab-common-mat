@@ -1,17 +1,19 @@
+%% make_raster.m 
+%  Given a toefile, plot a spike raster plot for all trials of one stimulus
+%  for all units
+%  Brad Theilman September 2015
+
+
 clear
 close all
 
-% Make a spike raster for a given cell
-
-
 load('st1215_cat_P01_S01_2ndPen_fixalignment_20150924T141526.mat');
-unit_index = 27;
-fs = 31250.0
 
-% Get the data for the chose cell
-stimnum = 49
+fs = 31250.0; % TODO: get this from the data file
 
-nstims = 49;
+stimnum = 49;
+
+nstims = 49; % TODO: get this from the data file
 
 figure();
 for unit_index= 1:31

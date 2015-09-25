@@ -1,21 +1,28 @@
+%% make_raster.m 
+%  Given a toefile, plot a spike raster plot for all trials of all stimuli
+%  for a single unit
+%  Brad Theilman September 2015
+
 clear
 close all
 
-% Make a spike raster for a given cell
-
+%% Make a spike raster for a given cell
 
 load('st1215_cat_P01_S01_2ndPen_fixalignment_20150924T141526.mat');
-unit_index = 2;
-fs = 31250.0
 
-% Get the data for the chose cell
+%TODO:  Get sampling frequency from data file.
+fs = 31250.0;
+
+% unit_index is which cell you wish to plot
+unit_index = 2;
+
+% Get the data for the chosen cell
 unit_data = toedata{unit_index, 1};
 nstims = length(unit_data.stims);
 
 figure();
 for stimnum = 1:nstims
     subplot(7, 7, stimnum)
-
     stim_data = unit_data.stims{stimnum, 1};
     stim_end_secs = double(stim_data.stim_end_times - stim_data.stim_start_times)/fs;
     ntrials = stim_data.ntrials;
