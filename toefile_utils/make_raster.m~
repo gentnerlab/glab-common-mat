@@ -14,7 +14,7 @@ load('st1215_cat_P01_S01_3rdPen_20150927T155818.mat');
 fs = 31250.0;
 
 % unit_index is which cell you wish to plot
-unit_index = 9;
+unit_index = 4;
 
 % Get the data for the chosen cell
 unit_data = toedata{unit_index, 1};
@@ -34,7 +34,7 @@ for stimnum = 1:nstims
            end
         end
         xlim([-2, stim_end_secs(trialnum)+2])
-        ylim([0, ntrials]);
+        ylim([0, ntrials+1]);
         line([0, 0], [0, ntrials+1], 'Color', 'red');
         line([stim_end_secs(trialnum), stim_end_secs(trialnum)], [0, ntrials+1], 'Color', 'red');
     end

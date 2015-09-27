@@ -5,7 +5,7 @@
 clear
 close all
 
-kwikfile = './st1215/kwikfiles/pen3/st1215_cat_P01_S01_3rdPen.kwik';
+kwikfile = './st1215/man_sort/pen3/st1215_cat_P01_S01_3rdPen.kwik';
 
 % get information
 kwikinfo = h5info(kwikfile);
@@ -59,9 +59,9 @@ stim_end_times = double(digmark_timesamples(digmark_codes == '>'));
 intertrial_start_times = double(digmark_timesamples(digmark_codes == '('));
 intertrial_end_times = double(digmark_timesamples(digmark_codes == ')'));
 
-stim_start_filename = cell2mat(stim_text);
-stim_start_filename = stim_start_filename(2:2:end, :);
-stim_start_filename = cellstr(stim_start_filename);
+stim_start_filenames = cell2mat(stim_text);
+stim_start_filenames = stim_start_filenames(2:2:end, :);
+stim_start_filenames = cellstr(stim_start_filenames);
 
 % stim_start_times = h5read(kwikfile, '/event_types/60/time_samples');
 % stim_start_filename = h5read(kwikfile, '/event_types/60/stim_filename');
@@ -70,7 +70,7 @@ stim_start_filename = cellstr(stim_start_filename);
 % intertrial_end_times = h5read(kwikfile, '/event_types/41/time_samples');
 
 stim_files_unique = unique(stim_start_filename);
-nstims = length(stim_files_unique);
+%nstims = length(stim_files_unique);
 
 
 %%
@@ -157,7 +157,7 @@ end
 %% Format output file name
 
 sav_date = datestr(now, 30);
-outfile_name = strcat('./st1215/good_data/st1215_cat_P01_S01_3rdPen_', sav_date, '.mat');
+outfile_name = strcat('./st1215/good_data/st1215_cat_P01_S01_2ndPen_', sav_date, '.mat');
 save(outfile_name, 'toedata');
 
 
