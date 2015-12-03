@@ -8,7 +8,7 @@ close all
 
 % Make a spike raster for a given cell
 
-datafile = './pen2/st1215_cat_P01_S01_2ndPen_fixalignment_20150924T141526';
+datafile = './pen2/more_merged/st1215_cat_P01_S01_2ndPen_moremerged_MUA20151102T092630';
 
 load(strcat(datafile, '.mat'));
 fs = 31250.0;

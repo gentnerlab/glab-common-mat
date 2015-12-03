@@ -5,7 +5,7 @@
 clear
 close all
 
-kwikfile = './st1215/kwikfiles/pen3/st1215_cat_P01_S01_3rdPen.kwik';
+kwikfile = './st1215/kwdfiles/pen2_latestpipeline/st1215_cat_P01_S01_2ndPen.kwik';
 
 % get information
 kwikinfo = h5info(kwikfile);
@@ -27,7 +27,8 @@ for i = 1:length(clusters)
     cluster_group = h5readatt(kwikfile, cluster_attr_path, 'cluster_group');
     disp(cluster_group);
     %cluster_group 2 is Good
-    if cluster_group == 2
+    % 1 is MUA
+    if cluster_group == 1
         good_cluster_inds(i) = 1;
         
     end
@@ -157,7 +158,7 @@ end
 %% Format output file name
 
 sav_date = datestr(now, 30);
-outfile_name = strcat('./st1215/good_data/st1215_cat_P01_S01_3rdPen_', sav_date, '.mat');
+outfile_name = strcat('./st1215/good_data/pen2/more_merged/st1215_cat_P01_S01_2ndPen_moremerged_MUA', sav_date, '.mat');
 save(outfile_name, 'toedata');
 
 
