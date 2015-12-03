@@ -157,9 +157,21 @@ end
 
 %% Format output file name
 
+data_to_save = struct();
+data_to_save.birdID = 'st1215';
+data_to_save.penetrationID = 1;
+data_to_save.siteID = 1;
+data_to_save.siteID = 1;
+data_to_save.XYpos = [0, 0];
+data_to_save.Zpos = 0;
+data_to_save.target_structure = 'NCM';
+
+data_to_save.fs = 31250;
+data_to_save.toedata = toedata;
+
 sav_date = datestr(now, 30);
 outfile_name = strcat('./st1215/good_data/pen2/more_merged/st1215_cat_P01_S01_2ndPen_moremerged_MUA', sav_date, '.mat');
-save(outfile_name, 'toedata');
+save(outfile_name, 'data_to_save');
 
 
 
