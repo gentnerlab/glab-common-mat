@@ -76,5 +76,9 @@ popvec_data_to_save.binwidth = bin_width;
 popvec_data_to_save.winstarts = windows_starts;
 popvecfilename = strcat(datafilename, '_popvec');
 save(popvecfilename, 'popvec_data_to_save');
-clear
-close all
+
+% From population vectors, generate cell groups
+
+%first compute average firing rate for cell:
+avg_fr = sum(sum(sum(population_vectors, 4), 3), 2)/(nwin*nstim*n_bin_start);
+
