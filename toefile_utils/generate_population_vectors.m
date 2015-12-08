@@ -7,7 +7,7 @@ close all
 datafilename = 'st1215_cat_P01_S01_2ndPen_moremerged_20151102T090824';
 load(strcat(datafilename, '.mat'));
 
-toedata = data_to_save.toedata;
+%toedata = data_to_save.toedata;
 % parameters for analysis
 bin_width = 10; % time bin width for cell groups in ms
 n_bin_start = 5; % number of different bin start times.
@@ -52,7 +52,7 @@ for cell = 1:ncells
         for bin_start = 1:n_bin_start
             spikecounts_thiscellstimbinst = zeros(1, 500);
             for trial = 1:ntrials
-                spikes_this_trial = spiketimes{trial, 1};
+                spikes_this_trial = 1000*spiketimes{trial, 1}; %convert to ms
                 Nspikes = length(spikes_this_trial);
                 repspike = repmat(spikes_this_trial, [1, nwin]);
                 repbinst = repmat(windows_starts(bin_start, :), [Nspikes, 1]);
@@ -70,15 +70,11 @@ for cell = 1:ncells
 end
 
 % Save population vector data
-popvec_data_to_save = rmfield(data_to_save, 'toedata');
-popvec_data_to_save.popvecs = population_vectors;
-popvec_data_to_save.binwidth = bin_width;
-popvec_data_to_save.winstarts = windows_starts;
+% popvec_data_to_save = rmfield(data_to_save, 'toedata');
+% popvec_data_to_save.popvecs = population_vectors;
+% popvec_data_to_save.binwidth = bin_width;
+% popvec_data_to_save.winstarts = windows_starts;
 popvecfilename = strcat(datafilename, '_popvec');
-save(popvecfilename, 'popvec_data_to_save');
+save(popvecfilename, 'population_vectors', 'bin_width', 'windows_starts');
 
-% From population vectors, generate cell groups
-
-%first compute average firing rate for cell:
-avg_fr = sum(sum(sum(population_vectors, 4), 3), 2)/(nwin*nstim*n_bin_start);
 
