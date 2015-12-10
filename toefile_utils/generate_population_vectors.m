@@ -25,8 +25,6 @@ starts_dt = floor(bin_width/n_bin_start); % equally spaced in each win.
 % get n_bin_start starting points for the windows within one bin time frame
 bin_starts = starts_dt.*[0:n_bin_start-1] - pre_stim_ms;
 
-
-%
 windows_starts = zeros(n_bin_start, nwin);
 windows_ends = zeros(n_bin_start, nwin);
 
@@ -38,7 +36,6 @@ for i = 2:nwin
 end
 
 % build population vectors
-
 ncells = length(toedata);
 nstim = 41;
 population_vectors = zeros(ncells, nwin, nstim, n_bin_start);
@@ -57,11 +54,9 @@ for cell = 1:ncells
                 repspike = repmat(spikes_this_trial, [1, nwin]);
                 repbinst = repmat(windows_starts(bin_start, :), [Nspikes, 1]);
                 repbinend = repmat(windows_ends(bin_start, :), [Nspikes, 1]);
-                
                 bool_spike = repspike >= repbinst & repspike < repbinend;
                 spikecounts_thistrial = sum(bool_spike, 1);
                 spikecounts_thiscellstimbinst = spikecounts_thiscellstimbinst + spikecounts_thistrial;
-                
             end
             rate_this = spikecounts_thiscellstimbinst / bin_width;
             population_vectors(cell, :, stim, bin_start) = rate_this;
